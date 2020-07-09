@@ -1,0 +1,14 @@
+{
+  "name": "@royyanbach/pokedex",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "pokeapi-js-wrapper": "^1.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

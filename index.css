@@ -1,0 +1,47 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: #afb5b9;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 48em) {
+  .container {
+    width: 44em;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .container {
+    width: 60em;
+  }
+}
+
+@media screen and (min-width: 80em) {
+  .container {
+    width: 76em;
+  }
+}
+
+.pokemon-list-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemon-list-item {
+  list-style-type: none;
+  width: 25%;
+}

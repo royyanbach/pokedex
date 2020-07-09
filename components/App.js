@@ -72,15 +72,16 @@ export default class App extends Component {
 
   handleTypeChange(e) {
     const selectedFilter = e.target.value;
-    if (!selectedFilter) {
-      return this.setState({
-        displayedPokemon: this.state.pokemonList,
-      })
-    }
 
     this.setState({
       selectedFilter,
     })
+
+    if (selectedFilter === 'all') {
+      return this.setState({
+        displayedPokemon: this.state.pokemonList,
+      })
+    }
 
     return POKE_API.getTypeByName(selectedFilter)
       .then((response) => {
@@ -117,7 +118,7 @@ export default class App extends Component {
       <>
         <Navbar>
           <select className="pokemon-filter" value={ this.state.selectedFilter } onChange={ this.handleTypeChange }>
-            <option value="">All type</option>
+            <option value="all">All type</option>
             {
               this.state.pokemonTypes.map(type => <option key={ type.name } value={ type.name }>{ type.name }</option>)
             }

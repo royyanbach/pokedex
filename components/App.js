@@ -22,18 +22,14 @@ export default class App extends Component {
       pokemonList: [],
       pokemonTypes: [],
       selectedPokemon: {},
-      isLoading: false,
     };
 
     this.fetchPokemonList = this.fetchPokemonList.bind(this);
     this.fetchTypeList = this.fetchTypeList.bind(this);
-    this.toggleLoading = this.toggleLoading.bind(this);
     this.handleSelectedPokemon = this.handleSelectedPokemon.bind(this);
   }
 
   fetchPokemonList() {
-    this.toggleLoading(true);
-
     POKE_API.getPokemonsList({
       limit: this.state.limit,
       offset: this.state.offset,
@@ -45,7 +41,6 @@ export default class App extends Component {
         })
         console.log(response);
       })
-      .finally(() => this.toggleLoading(false));
   }
 
   fetchTypeList() {
@@ -57,12 +52,6 @@ export default class App extends Component {
         })
       })
       .finally(() => this.toggleLoading(false));
-  }
-
-  toggleLoading(isLoading = false) {
-    this.setState({
-      isLoading,
-    });
   }
 
   handleSelectedPokemon(selecedPokemonId) {

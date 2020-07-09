@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Pokedex } from 'pokeapi-js-wrapper';
 
+import PokemonList from './PokemonList';
+
 const LIMIT = 10;
 const POKE_API = new Pokedex({
   cache: false,
@@ -51,11 +53,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <h1>Hello World</h1>
-        <ul className="pokemon-list-wrapper">
-          { this.state.displayedPokemon.map(pokemonItem => {
-            return <li key={ pokemonItem.name } className="pokemon-list-item">{ pokemonItem.name }</li>;
-          }) }
-        </ul>
+        <PokemonList pokemon={ this.state.displayedPokemon }/>
       </div>
     );
   }

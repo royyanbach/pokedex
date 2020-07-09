@@ -6,7 +6,6 @@ export default class PokemonStatItem extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="pokemon-stat-item">
         <p className="pokemon-stat-name">{ this.props.statsData.stat.name.replace('-', ' ') }</p>

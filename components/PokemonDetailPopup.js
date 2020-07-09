@@ -13,6 +13,7 @@ export default class PokemonDetailPopup extends Component {
       <div className="pokemon-detail-overlay">
         <div className="pokemon-detail-popup">
           <h2 className="pokemon-detail-popup__name">{ this.props.pokemonDetail.species.name }</h2>
+          <p className="pokemon-detail-popup__types">{ this.props.pokemonDetail.types.map(item => item.type.name).join(', ') }</p>
           <img className="pokemon-detail-popup__image" src={ this.props.pokemonDetail.sprites.front_default } />
           <img className="pokemon-detail-popup__image" src={ this.props.pokemonDetail.sprites.back_default } />
           {

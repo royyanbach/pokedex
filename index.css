@@ -42,8 +42,9 @@ body {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   grid-gap: 25px;
+  margin: 25px 0;
 }
 
 .pokemon-item-wrapper {
@@ -53,5 +54,53 @@ body {
   border-radius: 4px;
   background-repeat: no-repeat;
   background-size: contain;
-  background-position-x: 100%;
+  background-position-x: 95%;
+  background-position-y: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pokemon-item-wrapper:hover {
+  font-weight: bold;
+}
+
+.pokemon-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(96, 102, 110, 0.8);
+  display: flex;
+  align-items: center;
+}
+
+.pokemon-detail-popup {
+  width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px 40px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.pokemon-detail-popup__image {
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+.pokemon-detail-popup__name {
+  font-weight: bold;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.pokemon-detail-popup__close {
+  background: #fff;
+  border: 1px solid #5a5757;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
 }

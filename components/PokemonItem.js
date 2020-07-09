@@ -7,6 +7,7 @@ export default class PokemonList extends Component {
     const pokemonId = this.props.pokemonDetail.url.replace(/\/$/, '').split('/').pop();
     const backgroundUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
 
+    this.pokemonId = pokemonId;
     this.style = {
       backgroundImage: `url(${backgroundUrl})`
     }
@@ -14,7 +15,7 @@ export default class PokemonList extends Component {
 
   render() {
     return(
-      <li key={ this.props.pokemonDetail.name } className="pokemon-item-wrapper" style={ this.style }>
+      <li className="pokemon-item-wrapper" style={ this.style } onClick={ () => this.props.onSelectPokemon(this.pokemonId) }>
         { this.props.pokemonDetail.name }
       </li>
     );

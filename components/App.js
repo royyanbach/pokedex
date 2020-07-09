@@ -21,37 +21,76 @@ export default class App extends Component {
       displayedPokemon: [],
       pokemonList: [],
       pokemonTypes: [],
+      selectedFilter: '',
       selectedPokemon: {},
     };
 
-    this.fetchPokemonList = this.fetchPokemonList.bind(this);
+    this.appendUnique = this.appendUnique.bind(this);
+    this.fetchAllPokemon = this.fetchAllPokemon.bind(this);
     this.fetchTypeList = this.fetchTypeList.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSelectedPokemon = this.handleSelectedPokemon.bind(this);
   }
 
-  fetchPokemonList() {
+  appendUnique(newPokemonData) {
+    const originalPokemonList = this.state.pokemonList;
+    let existingPokemon = originalPokemonList.map(pokemon => pokemon.name);
+    newPokemonData.forEach(pokemon => {
+      if (existingPokemon.indexOf(pokemon.name) < 0) {
+        originalPokemonList.push(pokemon);
+      }
+    });
+
+    this.setState({
+      pokemonList: originalPokemonList,
+    })
+  }
+
+  fetchAllPokemon() {
     POKE_API.getPokemonsList({
       limit: this.state.limit,
       offset: this.state.offset,
     })
       .then((response) => {
+        this.appendUnique(response.results);
+
         this.setState({
           displayedPokemon: response.results,
-          pokemonList: response.results,
-        })
+        });
         console.log(response);
       })
   }
 
   fetchTypeList() {
-    POKE_API
-      .getTypesList()
+    POKE_API.getTypesList()
       .then((response) => {
         this.setState({
           pokemonTypes: response.results,
         })
       })
-      .finally(() => this.toggleLoading(false));
+  }
+
+  handleTypeChange(e) {
+    const selectedFilter = e.target.value;
+    if (!selectedFilter) {
+      return this.setState({
+        displayedPokemon: this.state.pokemonList,
+      })
+    }
+
+    this.setState({
+      selectedFilter,
+    })
+
+    return POKE_API.getTypeByName(selectedFilter)
+      .then((response) => {
+        const newPokemonData = response.pokemon.map(item => item.pokemon);
+        this.appendUnique(newPokemonData);
+
+        this.setState({
+          displayedPokemon: newPokemonData,
+        })
+      });
   }
 
   handleSelectedPokemon(selecedPokemonId) {
@@ -69,7 +108,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchPokemonList();
+    this.fetchAllPokemon();
     this.fetchTypeList();
   }
 
@@ -77,8 +116,8 @@ export default class App extends Component {
     return (
       <>
         <Navbar>
-          <select className="pokemon-filter">
-            <option value="">Filter by type</option>
+          <select className="pokemon-filter" value={ this.state.selectedFilter } onChange={ this.handleTypeChange }>
+            <option value="">All type</option>
             {
               this.state.pokemonTypes.map(type => <option key={ type.name } value={ type.name }>{ type.name }</option>)
             }

@@ -1,6 +1,7 @@
 {
   "name": "@royyanbach/pokedex",
   "scripts": {
+    "build": "NODE_ENV=production parcel builds index.html --no-source-maps --public-url /pokedex/ -d docs",
     "start": "parcel index.html"
   },
   "devDependencies": {

@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render pokemon popup detail correctly 1`] = `
+<div
+  className="pokemon-detail-overlay"
+>
+  <div
+    className="pokemon-detail-popup"
+  >
+    <h2
+      className="pokemon-detail-popup__name"
+    >
+      bulbasaur
+    </h2>
+    <p
+      className="pokemon-detail-popup__types"
+    >
+      grass, poison
+    </p>
+    <img
+      className="pokemon-detail-popup__image"
+      src=""
+    />
+    <img
+      className="pokemon-detail-popup__image"
+      src=""
+    />
+    <div
+      className="pokemon-stat-item"
+    >
+      <p
+        className="pokemon-stat-name"
+      >
+        hp
+      </p>
+      <p
+        className="pokemon-stat-value"
+      >
+        <strong>
+          40
+        </strong>
+        /100
+      </p>
+    </div>
+    <button
+      className="pokemon-detail-popup__close"
+    >
+      Close
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render pokemon stat correctly 1`] = `
+<div
+  className="pokemon-stat-item"
+>
+  <p
+    className="pokemon-stat-name"
+  >
+    hp
+  </p>
+  <p
+    className="pokemon-stat-value"
+  >
+    <strong>
+      40
+    </strong>
+    /100
+  </p>
+</div>
+`;

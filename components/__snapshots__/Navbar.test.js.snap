@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render navbar correctly 1`] = `
+<nav
+  className="navbar"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="navbar__content"
+    >
+      <div>
+        <h1
+          className="hero"
+        >
+          Pokedex
+        </h1>
+        <p
+          className="total-information"
+        >
+          Showing 
+          <strong>
+            100
+          </strong>
+           from total of 
+          <strong>
+            1000
+          </strong>
+           pokemons
+        </p>
+      </div>
+      Hello world
+    </div>
+  </div>
+</nav>
+`;

@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { Pokedex } from 'pokeapi-js-wrapper';
 
+import api from '../api';
 import Navbar from './Navbar';
 import PokemonList from './PokemonList';
 
 const ALL_FILTER = 'all';
 const LIMIT = 66;
-const POKE_API = new Pokedex({
-  cache: false,
-});
-
-window.P = POKE_API;
 
 export default class App extends Component {
   constructor() {
@@ -54,10 +49,7 @@ export default class App extends Component {
       return
     }
 
-    POKE_API.getPokemonsList({
-      limit: this.state.limit,
-      offset: this.state.offset,
-    })
+    api.getAllPokemons(this.state.offset, this.state.limit)
       .then((response) => {
         this.appendUnique(response.results);
 
@@ -70,7 +62,7 @@ export default class App extends Component {
   }
 
   fetchTypeList() {
-    POKE_API.getTypesList()
+    api.getAllTypes()
       .then((response) => {
         this.setState({
           pokemonTypes: response.results,
@@ -91,7 +83,7 @@ export default class App extends Component {
       })
     }
 
-    return POKE_API.getTypeByName(selectedFilter)
+    return api.getAllPokemonsByType(selectedFilter)
       .then((response) => {
         const newPokemonData = response.pokemon.map(item => item.pokemon);
         this.appendUnique(newPokemonData);
@@ -103,11 +95,11 @@ export default class App extends Component {
   }
 
   handleSelectedPokemon(selecedPokemonId) {
-    if (parseInt(this.state.selectedPokemon.id, 10) === parseInt(selecedPokemonId, 10)) {
+    if (this.state.selectedPokemon.id === selecedPokemonId) {
       return;
     }
 
-    return POKE_API.getPokemonByName(selecedPokemonId)
+    return api.getPokemonByName(selecedPokemonId)
       .then((response) => {
         this.setState({
           selectedPokemon: response,

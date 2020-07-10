@@ -50,7 +50,7 @@ export default class PokemonList extends Component {
           { this.props.pokemons.map((pokemonItem, index) => (
             <PokemonItem
               key={ pokemonItem.name }
-              pokemonDetail={ pokemonItem }
+              pokemonPreviewData={ pokemonItem }
               onSelectPokemon={ this.handleSelectedPokemon }
               observer={ index === this.props.pokemons.length - 1 ? this.observer : null }/>
           )) }

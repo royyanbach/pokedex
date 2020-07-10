@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render list with correctly 1`] = `
+<li
+  className="pokemon-item-wrapper"
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundImage": "url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png)",
+    }
+  }
+>
+  bulbasaur
+</li>
+`;

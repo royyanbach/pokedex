@@ -52,11 +52,16 @@ p {
 .navbar__content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .hero {
   font-size: 40px;
   margin: 0;
+}
+
+.total-information {
+  font-size: 14px;
 }
 
 .pokemon-filter {
@@ -68,6 +73,7 @@ p {
   font-size: 17px;
   border: 2px solid #8e9da9;
   text-transform: capitalize;
+  height: 50px;
 }
 
 .pokemon-filter option {

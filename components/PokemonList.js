@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import PokemonItem from './PokemonItem';
 import PokemonDetailPopup from './PokemonDetailPopup';
 
+const OFFSET_SCROLL_TRIGGER = '100px';
+
 export default class PokemonList extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,19 @@ export default class PokemonList extends Component {
     this.state = {
       showPokemonDetail: false,
     };
+  }
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver(
+      entries => {
+        if (entries[0] && entries[0].isIntersecting) {
+          console.log('intersecting');
+          this.observer.unobserve(entries[0].target);
+          this.props.onReachBottom();
+        }
+      },
+      { rootMargin: `${OFFSET_SCROLL_TRIGGER} 0px 0px 0px` },
+    );
   }
 
   handleSelectedPokemon(value) {
@@ -33,8 +48,12 @@ export default class PokemonList extends Component {
     return (
       <>
         <ul className="pokemon-list-wrapper">
-          { this.props.pokemons.map(pokemonItem => (
-            <PokemonItem key={ pokemonItem.name } pokemonDetail={ pokemonItem } onSelectPokemon={ this.handleSelectedPokemon }/>
+          { this.props.pokemons.map((pokemonItem, index) => (
+            <PokemonItem
+              key={ pokemonItem.name }
+              pokemonDetail={ pokemonItem }
+              onSelectPokemon={ this.handleSelectedPokemon }
+              observer={ index === this.props.pokemons.length - 1 ? this.observer : null }/>
           )) }
         </ul>
         {

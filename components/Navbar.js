@@ -10,7 +10,10 @@ export default class Navbar extends Component {
       <nav className="navbar">
         <div className="container">
           <div className="navbar__content">
-            <h1 className="hero">Pokedex</h1>
+            <div>
+              <h1 className="hero">Pokedex</h1>
+              <p className="total-information">Showing <strong>{ this.props.totalDisplayedPokemon }</strong> from total of <strong>{ this.props.totalPokemon }</strong> pokemons</p>
+            </div>
             { this.props.children }
           </div>
         </div>

@@ -4,6 +4,7 @@ import { Pokedex } from 'pokeapi-js-wrapper';
 import Navbar from './Navbar';
 import PokemonList from './PokemonList';
 
+const ALL_FILTER = 'all';
 const LIMIT = 66;
 const POKE_API = new Pokedex({
   cache: false,
@@ -20,8 +21,9 @@ export default class App extends Component {
       offset: 0,
       displayedPokemon: [],
       pokemonList: [],
+      totalPokemon: 0,
       pokemonTypes: [],
-      selectedFilter: '',
+      selectedFilter: ALL_FILTER,
       selectedPokemon: {},
     };
 
@@ -30,6 +32,7 @@ export default class App extends Component {
     this.fetchTypeList = this.fetchTypeList.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSelectedPokemon = this.handleSelectedPokemon.bind(this);
+    this.handleReachBottom = this.handleReachBottom.bind(this);
   }
 
   appendUnique(newPokemonData) {
@@ -47,6 +50,10 @@ export default class App extends Component {
   }
 
   fetchAllPokemon() {
+    if (this.state.totalPokemon && this.state.pokemonList.length === this.state.totalPokemon) {
+      return
+    }
+
     POKE_API.getPokemonsList({
       limit: this.state.limit,
       offset: this.state.offset,
@@ -54,9 +61,12 @@ export default class App extends Component {
       .then((response) => {
         this.appendUnique(response.results);
 
-        this.setState({
-          displayedPokemon: response.results,
-        });
+        this.setState((state) => ({
+          displayedPokemon: state.pokemonList,
+          offset: state.offset + state.limit,
+          totalPokemon: response.count,
+        }))
+
         console.log(response);
       })
   }
@@ -95,7 +105,6 @@ export default class App extends Component {
   }
 
   handleSelectedPokemon(selecedPokemonId) {
-    console.log(this.state.selectedPokemon.id, selecedPokemonId);
     if (parseInt(this.state.selectedPokemon.id, 10) === parseInt(selecedPokemonId, 10)) {
       return;
     }
@@ -108,6 +117,15 @@ export default class App extends Component {
       });
   }
 
+  handleReachBottom() {
+    console.log(this.state.selectedFilter)
+    if (this.state.selectedFilter !== 'all') {
+      return
+    }
+
+    this.fetchAllPokemon();
+  }
+
   componentDidMount() {
     this.fetchAllPokemon();
     this.fetchTypeList();
@@ -116,9 +134,9 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <Navbar>
+        <Navbar totalPokemon={ this.state.totalPokemon } totalDisplayedPokemon = { this.state.displayedPokemon.length }>
           <select className="pokemon-filter" value={ this.state.selectedFilter } onChange={ this.handleTypeChange }>
-            <option value="all">All type</option>
+            <option value={ ALL_FILTER }>All type</option>
             {
               this.state.pokemonTypes.map(type => <option key={ type.name } value={ type.name }>{ type.name }</option>)
             }
@@ -129,6 +147,7 @@ export default class App extends Component {
             pokemons={ this.state.displayedPokemon }
             selectedPokemon={ this.state.selectedPokemon }
             onSelectPokemon={ this.handleSelectedPokemon }
+            onReachBottom= { this.handleReachBottom }
           />
         </div>
       </>

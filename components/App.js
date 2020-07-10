@@ -66,8 +66,6 @@ export default class App extends Component {
           offset: state.offset + state.limit,
           totalPokemon: response.count,
         }))
-
-        console.log(response);
       })
   }
 
@@ -118,7 +116,6 @@ export default class App extends Component {
   }
 
   handleReachBottom() {
-    console.log(this.state.selectedFilter)
     if (this.state.selectedFilter !== 'all') {
       return
     }

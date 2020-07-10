@@ -8,7 +8,6 @@ export default class PokemonDetailPopup extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="pokemon-detail-overlay">
         <div className="pokemon-detail-popup">

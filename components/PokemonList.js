@@ -21,7 +21,6 @@ export default class PokemonList extends Component {
     this.observer = new IntersectionObserver(
       entries => {
         if (entries[0] && entries[0].isIntersecting) {
-          console.log('intersecting');
           this.observer.unobserve(entries[0].target);
           this.props.onReachBottom();
         }

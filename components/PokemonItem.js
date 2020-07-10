@@ -9,9 +9,9 @@ export default class PokemonItem extends Component {
 
     this.pokemonId = pokemonId;
     this.el = createRef();
-    // this.style = {
-    //   backgroundImage: `url(${backgroundUrl})`
-    // }
+    this.style = {
+      backgroundImage: `url(${backgroundUrl})`
+    }
   }
 
   componentDidMount() {
